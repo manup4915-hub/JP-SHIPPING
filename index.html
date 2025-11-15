@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JP China Shipping & Trading Agency</title>
+
+  <style>
+    /* ========= Base Settings ========= */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --red: #e11d2f;
+      --red-dark: #7f0b16;
+      --red-soft: #fecaca;
+      --bg: #ffffff;
+      --bg-alt: #fff5f5;
+      --white: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --radius: 10px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.09);
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ========= Layout Helpers ========= */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section.alt-bg {
+      background: var(--bg-alt);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 2.5rem auto;
+    }
+
+    /* ========= Navbar ========= */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(127, 11, 22, 0.96);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+      color: var(--white);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--red-dark);
+      border: 2px solid var(--red-dark);
+    }
+
+    .logo-text {
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: #fee2e2;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--white);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: var(--white);
+      color: var(--red-dark);
+      padding: 0.55rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid rgba(254, 202, 202, 0.7);
+    }
+
+    /* ========= Mobile Nav Button ========= */
+    .nav-toggle {
+      display: none;
+      width: 36px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid rgba(254, 202, 202, 0.7);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 6px;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      border-radius: 999px;
+      background: #fee2e2;
+    }
+
+    /* ========= Mobile Nav Panel ========= */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: rgba(127, 11, 22, 0.98);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(254, 202, 202, 0.6);
+    }
+
+    .mobile-nav a {
+      padding: 0.85rem 1.5rem;
+      color: #fee2e2;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(248, 113, 113, 0.25);
+      font-size: 0.95rem;
+    }
+
+    .mobile-nav a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    /* ========= Hero (Glowing Animated Background) ========= */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      padding: 4.5rem 0 4rem 0;
+      background: radial-gradient(circle at top left, rgba(248, 113, 113, 0.5), transparent 55%),
+                  radial-gradient(circle at top right, rgba(220, 38, 38, 0.65), transparent 55%),
+                  #111827;
+    }
+
+    /* Glowing animated blobs */
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.55;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      background: radial-gradient(circle, #f97373, #ef4444, #b91c1c);
+      animation: glowMove 18s ease-in-out infinite alternate;
+    }
+
+    .hero::before {
+      top: -120px;
+      left: -80px;
+    }
+
+    .hero::after {
+      bottom: -140px;
+      right: -60px;
+      animation-delay: -6s;
+    }
+
+    @keyframes glowMove {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(40px, -30px, 0) scale(1.1);
+      }
+      100% {
+        transform: translate3d(-20px, 40px, 0) scale(1.05);
+      }
+    }
+
+    .hero-content {
+      position: relative; /* keep content above glow */
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      gap: 2.5rem;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .hero-text h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      max-width: 520px;
+      color: #fee2e2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .hero-stats h3 {
+      font-size: 1.4rem;
+    }
+
+    .hero-stats p {
+      font-size: 0.85rem;
+      color: #fecaca;
+    }
+
+    /* Tiny flag row */
+    .hero-flags {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: #fee2e2;
+      margin-bottom: 0.7rem;
+      opacity: 0.9;
+    }
+
+    .flag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(254, 202, 202, 0.45);
+      font-size: 0.8rem;
+    }
+
+    /* ========= Buttons ========= */
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn.primary {
+      background: var(--white);
+      color: var(--red-dark);
+    }
+
+    .btn.secondary {
+      border: 1px solid rgba(254, 202, 202, 0.9);
+      color: #fee2e2;
+      background: transparent;
+    }
+
+    .btn.full-width {
+      width: 100%;
+    }
+
+    /* ========= Hero Card (Tracking) ========= */
+    .hero-card {
+      background: rgba(17, 24, 39, 0.97);
+      padding: 1.8rem;
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(254, 202, 202, 0.5);
+    }
+
+    .hero-card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-card label {
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-card input {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 9px;
+      border: 1px solid #4b5563;
+      background: #020617;
+      color: var(--white);
+      margin-bottom: 0.9rem;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    /* ========= Cards / Services ========= */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 1.6rem;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+      border: 1px solid #fee2e2;
+    }
+
+    .card h3 {
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .card.highlight {
+      border-top: 3px solid var(--red);
+    }
+
+    /* ========= Steps / How It Works ========= */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .step {
+      background: var(--white);
+      padding: 1.6rem;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: var(--red-dark);
+      color: var(--white);
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+    }
+
+    /* ========= Testimonials ========= */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .testimonial {
+      background: var(--white);
+      padding: 1.6rem;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+    }
+
+    .quote {
+      font-style: italic;
+      margin-bottom: 0.8rem;
+    }
+
+    .author {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ========= Quote / Contact Form ========= */
+    .quote-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.5fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .quote-text p {
+      margin-top: 0.75rem;
+      color: var(--muted);
+    }
+
+    .quote-form {
+      background: var(--white);
+      padding: 1.7rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid #fee2e2;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      font-size: 0.9rem;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+    }
+
+    /* ========= Footer ========= */
+    .footer {
+      background: var(--red-dark);
+      color: #fee2e2;
+      padding-top: 2.2rem;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(254, 202, 202, 0.6);
+    }
+
+    .footer-col h3,
+    .footer-col h4 {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-col a {
+      color: #fee2e2;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 0.9rem 0 1.2rem 0;
+      font-size: 0.85rem;
+      color: #fed7d7;
+    }
+
+    /* ========= Floating WhatsApp Button ========= */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 1.6rem;
+      right: 1.6rem;
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      background: #25d366;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .whatsapp-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #25d366;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .whatsapp-label {
+      white-space: nowrap;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 480px) {
+      .whatsapp-label {
+        display: none; /* show only the round icon on very small screens */
+      }
+
+      .whatsapp-float {
+        padding: 0.4rem;
+      }
+    }
+
+    /* ========= Responsive ========= */
+    @media (max-width: 960px) {
+      .hero-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .quote-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      /* Hide desktop nav on mobile */
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      /* Show hamburger button on mobile */
+      .nav-toggle {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .cards-grid,
+      .steps,
+      .testimonials,
+      .footer-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 3.2rem;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">JP</span>
+        <span class="logo-text">JP China Shipping &amp; Trading Agency</span>
+      </div>
+
+      <!-- Desktop nav -->
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#quote">Contact</a>
+      </nav>
+
+      <!-- Call-to-action button (desktop) -->
+      <a href="#quote" class="nav-cta">Get a Quote</a>
+
+      <!-- Mobile menu button -->
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile dropdown menu -->
+    <nav class="mobile-nav">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#why-us">Why Us</a>
+      <a href="#quote">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <div class="hero-flags">
+          <span class="flag-pill">🇨🇳 China</span>
+          <span>⇄</span>
+          <span class="flag-pill">🇬🇭 Ghana</span>
+          <span>Dedicated Shipping &amp; Trading Corridor</span>
+        </div>
+
+        <h1>Specialized China ↔ Ghana Shipping &amp; Trading</h1>
+        <p>
+          JP China Shipping &amp; Trading Agency focuses only on the
+          China–Ghana route. We help importers and exporters move cargo
+          reliably between China and Ghana by sea and air, with trading and
+          sourcing support.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#quote" class="btn primary">Get China ↔ Ghana Quote</a>
+          <a href="#tracking" class="btn secondary">Track Shipment</a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <h3>2</h3>
+            <p>Main Trade Lanes (CN ⇄ GH)</p>
+          </div>
+          <div>
+            <h3>8+</h3>
+            <p>Key Partner Cities</p>
+          </div>
+          <div>
+            <h3>Door-to-Door</h3>
+            <p>Pickup &amp; Delivery Options</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h2>Quick Shipment Tracker</h2>
+        <form id="tracking">
+          <label for="tracking-id">Tracking ID</label>
+          <input
+            type="text"
+            id="tracking-id"
+            placeholder="Enter your JP tracking number"
+          />
+          <button type="button" class="btn primary full-width">
+            Track Shipment
+          </button>
+          <p class="note">Demo only – connect this to your real tracking later.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section-title">Our China ↔ Ghana Services</h2>
+      <p class="section-subtitle">
+        Focused logistics and trading support for importers and exporters
+        working only between China and Ghana.
+      </p>
+      <div class="cards-grid">
+        <div class="card">
+          <h3>Sea Freight: China → Ghana</h3>
+          <p>
+            FCL and LCL shipments from major Chinese ports (Shenzhen, Guangzhou,
+            Ningbo, Shanghai, and more) to Ghanaian ports such as Tema and
+            Takoradi. Ideal for bulk cargo, machinery, and general goods.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Sea Freight: Ghana → China</h3>
+          <p>
+            Export services for Ghanaian businesses sending goods like
+            agricultural products, raw materials, and finished items to buyers
+            and partners in China.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Air Freight: Time-Sensitive Cargo</h3>
+          <p>
+            Fast air shipments linking Chinese airports with Kotoka International
+            Airport in Accra. Perfect for electronics, samples, and
+            high-value goods that must arrive quickly.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Consolidation &amp; Small Cargo</h3>
+          <p>
+            Combine small orders from multiple suppliers in China into one
+            shipment to Ghana – or consolidate Ghanaian exports bound for
+            different buyers in China, reducing costs and complexity.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">How JP China Shipping Works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Send Your China–Ghana Request</h3>
+          <p>
+            Let us know if you are shipping from China to Ghana or Ghana to
+            China. Share your cargo type, weight/volume, supplier or buyer
+            contacts, and preferred mode (sea or air).
+          </p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>We Plan Route &amp; Documents</h3>
+          <p>
+            We arrange pickup, consolidation, booking, and documentation
+            (invoices, packing lists, HS codes, and more) following both
+            Chinese and Ghanaian customs requirements.
+          </p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Ship, Clear &amp; Deliver</h3>
+          <p>
+            Your cargo moves along the China–Ghana corridor with continuous
+            updates. We support customs clearance and, where available,
+            door-to-door delivery.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="why-us" class="section">
+    <div class="container">
+      <h2 class="section-title">Why Choose JP China Shipping &amp; Trading</h2>
+      <div class="cards-grid">
+        <div class="card highlight">
+          <h3>China–Ghana Only Focus</h3>
+          <p>
+            We specialize exclusively in the China ↔ Ghana lane. That focus
+            gives you better local knowledge, trusted contacts, and efficient
+            handling at both ends.
+          </p>
+        </div>
+        <div class="card highlight">
+          <h3>End-to-End Coordination</h3>
+          <p>
+            From supplier pickup in China to final delivery in Ghana (and the
+            reverse), our team coordinates every step so you deal with one
+            point of contact.
+          </p>
+        </div>
+        <div class="card highlight">
+          <h3>Customs &amp; Documentation Support</h3>
+          <p>
+            We guide you on required documents, HS codes, duties estimates, and
+            clearance processes to reduce delays and surprises at the ports.
+          </p>
+        </div>
+        <div class="card highlight">
+          <h3>Transparent Pricing</h3>
+          <p>
+            Clear quotations in CNY and GHS with all major cost components
+            explained – you understand exactly what you are paying for.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section alt-bg">
+    <div class="container">
+      <h2 class="section-title">What Our Clients Say</h2>
+      <div class="testimonials">
+        <div class="testimonial">
+          <p class="quote">
+            “JP China Shipping made importing from Shenzhen to Accra simple.
+            They handled consolidation, shipping, and customs. I only focused
+            on my business.”
+          </p>
+          <p class="author">— Kofi A., Electronics Importer (Accra)</p>
+        </div>
+        <div class="testimonial">
+          <p class="quote">
+            “We export Ghanaian products to buyers in China. Their team helped
+            us meet documentation requirements and kept the cargo moving.”
+          </p>
+          <p class="author">— Ama E., Exporter (Ghana)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote / Contact Section -->
+  <section id="quote" class="section">
+    <div class="container quote-layout">
+      <div class="quote-text">
+        <h2 class="section-title">Request a China ↔ Ghana Shipping Quote</h2>
+        <p>
+          Share your shipment details and we’ll respond with a tailored quote
+          for the China–Ghana corridor, including timing and mode options.
+        </p>
+      </div>
+      <form id="contact" class="quote-form">
+        <div class="form-group">
+          <label for="name">Full Name / Company</label>
+          <input id="name" type="text" placeholder="Your name or company" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone / WhatsApp</label>
+          <input id="phone" type="tel" placeholder="+233 ... or +86 ..." />
+        </div>
+        <div class="form-group">
+          <label for="direction">Direction</label>
+          <input
+            id="direction"
+            type="text"
+            placeholder="China → Ghana or Ghana → China"
+          />
+        </div>
+        <div class="form-group">
+          <label for="route">Route (City / Port)</label>
+          <input
+            id="route"
+            type="text"
+            placeholder="e.g. Shenzhen, CN → Tema, GH"
+          />
+        </div>
+        <div class="form-group">
+          <label for="cargo">Cargo Details</label>
+          <textarea
+            id="cargo"
+            rows="4"
+            placeholder="Type of goods, volume/weight, preferred mode (sea/air), special handling..."
+          ></textarea>
+        </div>
+        <button type="submit" class="btn primary full-width">
+          Submit Quote Request
+        </button>
+        <p class="note">
+          You can later connect this form to email, WhatsApp, or a database.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col">
+        <h3>JP China Shipping &amp; Trading Agency</h3>
+        <p>
+          A dedicated logistics and trading partner for the China–Ghana
+          corridor, supporting importers and exporters on both sides.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Accra, Ghana &amp; China (update with your exact offices)</p>
+        <p>Phone/WhatsApp: +233 XXX XXX XXX / +86 XXX XXX XXXX</p>
+        <p>Email: info@jpchinashipping.com</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#services">Services</a><br />
+        <a href="#quote">Request a Quote</a><br />
+        <a href="#home">Back to Top</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> JP China Shipping &amp; Trading Agency. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Chat Button -->
+  <!-- 🔁 Replace 233000000000 with your real WhatsApp number -->
+  <a
+    href="https://wa.me/233000000000?text=Hello%20JP%20China%20Shipping%2C%20I%20would%20like%20a%20China%E2%86%94Ghana%20shipping%20quote."
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener"
+  >
+    <span class="whatsapp-icon">W</span>
+    <span class="whatsapp-label">Chat on WhatsApp</span>
+  </a>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const navToggle = document.querySelector(".nav-toggle");
+    const mobileNav = document.querySelector(".mobile-nav");
+
+    navToggle.addEventListener("click", () => {
+      mobileNav.classList.toggle("open");
+    });
+
+    // Close mobile menu when a link is clicked
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+      });
+    });
+
+    // Simple (optional) prevention of empty quote form submission
+    const quoteForm = document.getElementById("contact");
+    quoteForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Thank you! Your quote request has been captured (demo). You can now connect this form to email or a database.");
+    });
+  </script>
+</body>
+</html>
